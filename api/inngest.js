@@ -1,7 +1,10 @@
-import { serve } from "inngest/next";
+import { serve } from "inngest/fetch";
 import { inngest, functions } from "../backend/lib/inngest.js";
 
-export const { GET, POST, PUT } = serve({
+const handler = serve({
   client: inngest,
   functions,
+  serveHost: "https://prep4-place.vercel.app",
 });
+
+export default handler;
