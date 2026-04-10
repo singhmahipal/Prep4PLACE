@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 import { ENV } from "./env.js";
-import e from "express";
 
 export const connectDB = async () => {
   if (!ENV.DB_URL) {
