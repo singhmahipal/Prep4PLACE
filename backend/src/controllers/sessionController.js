@@ -18,7 +18,7 @@ export async function createSession(req, res) {
     const callId = `session_${Date.now()}_${Math.random().toString(36).substring(7)}`;
 
     //create session in db
-    const session = new Session.create({
+    const session = Session.create({
       problem,
       difficulty,
       host: userId,
@@ -90,7 +90,7 @@ export async function getSessionById(req, res) {
       .populate("host", "name email profileImage clerkId")
       .populate("participant", "name email profileImage clerkId");
 
-    if (!session) res.status(404).json({ message: "Session Not Found" });
+    if (!session) return res.status(404).json({ message: "Session Not Found" });
 
     res.status(200).json({ session });
   } catch (error) {
@@ -107,11 +107,11 @@ export async function joinSession(req, res) {
 
     const session = await Session.findById(id);
 
-    if (!session) res.status(404).json({ message: "Session not found" });
+    if (!session) return res.status(404).json({ message: "Session not found" });
 
     // check if session is already full - has a participant
     if (session.participant)
-      res.status(404).json({ message: "Session is full" });
+      return res.status(400).json({ message: "Session is full" });
 
     session.participant = userId;
 
@@ -134,7 +134,7 @@ export async function endSession(req, res) {
 
     const session = await Session.findById(id);
 
-    if (!session) res.status(404).json({ message: "Session not found" });
+    if (!session) return res.status(404).json({ message: "Session not found" });
 
     // check if user is the host
     if (session.host.toString() !== userId.toString()) {
@@ -147,7 +147,7 @@ export async function endSession(req, res) {
     }
 
     session.status = "completed";
-    session.save();
+    await session.save();
 
     // delete stream video call
     const call = streamClient.video.call("default", session.callId);
@@ -155,7 +155,7 @@ export async function endSession(req, res) {
 
     // delete stream chat channel
     const channel = chatClient.channel("messaging", session.callId);
-    await call.delete();
+    await channel.delete();
 
     res.status(200).json({ message: "Session ended successfully" });
   } catch (error) {
