@@ -8,11 +8,16 @@ import {
 } from "@clerk/react";
 import { Navigate, Routes } from "react-router";
 import { Route } from "react-router";
-import Homepage from "./Pages/Homepage.jsx";
+import Homepage from "./Pages/HomePage.jsx";
+import ProblemPage from "./Pages/ProblemsPage.jsx";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  const { isSignedIn } = useUser();
+  const { isLoaded, isSignedIn } = useUser();
+
+  if (!isLoaded) {
+    return null; 
+  }
 
   return (
     <>
@@ -20,7 +25,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route
           path="/problems"
-          element={isSignedIn ? <Homepage /> : <Navigate to={"/"} />}
+          element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />}
         />
       </Routes>
 
