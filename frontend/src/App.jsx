@@ -9,7 +9,8 @@ import {
 import { Navigate, Routes } from "react-router";
 import { Route } from "react-router";
 import Homepage from "./Pages/HomePage.jsx";
-import ProblemPage from "./Pages/ProblemsPage.jsx";
+import ProblemPage from "./Pages/ProblemPage.jsx";
+import ProblemsPage from "./Pages/ProblemsPage.jsx";
 import { Toaster } from "react-hot-toast";
 import DashboardPage from "./Pages/DashboardPage.jsx";
 
@@ -34,6 +35,10 @@ function App() {
         />
         <Route
           path="/problems"
+          element={isSignedIn ? <ProblemsPage /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/problem/:id"
           element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />}
         />
       </Routes>
