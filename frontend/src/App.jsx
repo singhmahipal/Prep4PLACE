@@ -30,7 +30,7 @@ function App() {
           element={!isSignedIn ? <Homepage /> : <Navigate to={"/dashboard"} />}
         />
         <Route
-          path="/"
+          path="/dashboard"
           element={isSignedIn ? <DashboardPage /> : <Navigate to={"/"} />}
         />
         <Route
