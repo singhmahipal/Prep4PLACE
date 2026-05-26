@@ -26,7 +26,7 @@ function ProblemsPage() {
         {/* PROBLEMS LIST */}
         <div className="space-y-4">
           {problems.map((problem) => (
-            <Link key={problem.id} to={`/problems/${problem.id}`} className="card bg-base-100 hover:scale-[1.01] transition-transform">
+            <Link key={problem.id} to={`/problem/${problem.id}`} className="card bg-base-100 hover:scale-[1.01] transition-transform">
               <div className="card-body">
                 <div className="flex items-center justify-between gap-4">
                   {/* LEFT SIDE */}

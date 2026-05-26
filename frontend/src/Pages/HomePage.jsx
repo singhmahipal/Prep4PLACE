@@ -88,7 +88,7 @@ const HomePage = () => {
 
             {/* CTA BUTTONS */}
             <div className="flex flex-wrap gap-4">
-              <SignInButton mode="madal">
+              <SignInButton mode="modal">
                 <button className="btn btn-primary btn-lg">
                   Start Coding Now
                   <ArrowRightIcon className="size-5" />

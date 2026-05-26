@@ -2,7 +2,7 @@ import axiosInstance from "../lib/axios";
 
 export const sessionApi = {
     createSession: async (data) => {
-        const response = await axiosInstance.get("/sessions", data);
+        const response = await axiosInstance.post("/sessions", data);
         return response.data;
     },
     getActiveSessions: async () => {
@@ -18,11 +18,11 @@ export const sessionApi = {
         return response.data;
     },
     joinSession: async (id) => {
-        const response = await axiosInstance.get(`/sessions/${id}/join`);
+        const response = await axiosInstance.post(`/sessions/${id}/join`);
         return response.data;
     },
     endSession: async (id) => {
-        const response = await axiosInstance.get(`/sessions/${id}/end`);
+        const response = await axiosInstance.post(`/sessions/${id}/end`);
         return response.data;
     },
     getStreamToken: async () => {
