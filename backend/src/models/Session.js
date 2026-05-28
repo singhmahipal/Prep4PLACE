@@ -24,6 +24,7 @@ const sessionSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["active", "pending", "completed"],
+      default: "active",
     },
     // stream video call Id
     callId: {
