@@ -15,6 +15,7 @@ import ProblemsPage from "./Pages/ProblemsPage.jsx";
 import { Toaster } from "react-hot-toast";
 import DashboardPage from "./Pages/DashboardPage.jsx";
 import axiosInstance from "./lib/axios";
+import SessionPage from "./Pages/SessionPage.jsx";
 
 function App() {
   const { isLoaded, isSignedIn } = useUser();
@@ -63,7 +64,7 @@ function App() {
         />
         <Route
           path="/session/:id"
-          element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />}
+          element={isSignedIn ? <SessionPage /> : <Navigate to={"/"} />}
         />
       </Routes>
 
